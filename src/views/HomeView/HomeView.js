@@ -68,8 +68,8 @@ export class HomeView extends React.Component {
         <div className='row'>
           <div className='col-xs-2 col-xs-offset-5'>
             <img className={classes.duck}
-                 src={DuckImage}
-                 alt='This is a duck, because Redux.' />
+              src={DuckImage}
+              alt='This is a duck, because Redux.' />
           </div>
         </div>
         <h1><FormattedMessage {...messages.welcome} /></h1>
@@ -77,13 +77,11 @@ export class HomeView extends React.Component {
           <FormattedMessage {...messages.sampleCounter} />
           <span className={classes['counter--green']}>{this.props.counter}</span>
         </h2>
-        <button className='btn btn-default'
-                onClick={() => this.props.increment(1)}>
+        <button className='btn btn-default' onClick={() => this.props.increment(1)}>
           Increment
         </button>
         {' '}
-        <button className='btn btn-default'
-                onClick={this.props.doubleAsync}>
+        <button className='btn btn-default' onClick={this.props.doubleAsync}>
           Double (Async)
         </button>
         <hr />

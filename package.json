@@ -21,7 +21,8 @@
     "deploy": "better-npm-run deploy",
     "build:i18n": "rm -rf _translations && BABEL_ENV=i18n babel --quiet src > /dev/null",
     "build:i18n:langs": "npm run build:i18n && babel-node --babelrc=false scripts/i18nToXliff.js",
-    "flow:check": "babel-node bin/flow-check"
+    "flow:check": "babel-node bin/flow-check",
+    "codecov": "cat coverage/*/lcov.info | codecov"
   },
   "betterScripts": {
     "dev": {
@@ -97,6 +98,7 @@
     "chai-as-promised": "^5.1.0",
     "chai-enzyme": "^0.4.0",
     "cheerio": "^0.20.0",
+    "codecov": "^1.0.1",
     "css-loader": "^0.23.0",
     "cssnano": "^3.3.2",
     "enzyme": "^1.5.0",

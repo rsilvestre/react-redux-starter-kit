@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import { actions as counterActions } from '../../redux/modules/counter'
 import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
@@ -18,11 +17,6 @@ const messages = defineMessages({
     id: 'home.sampleCounter',
     description: 'Sample Counter text',
     defaultMessage: 'Sample Counter: '
-  },
-  linkNotFoundView: {
-    id: 'home.linkNotFoundView',
-    description: 'Text link for not found view',
-    defaultMessage: 'Go to 404 Page'
   },
   spanish: {
     id: 'home.spanish',
@@ -62,7 +56,7 @@ export class HomeView extends React.Component {
     const {localeChange} = this.props
     return (
       <div className='container text-center'>
-      <LanguageSelector onChange={localeChange}>prueba Idioma Selector</LanguageSelector>
+        <LanguageSelector onChange={localeChange}>prueba Idioma Selector</LanguageSelector>
 
         <h1><FormattedMessage {...messages.welcome} /></h1>
         <div className='row'>
@@ -84,8 +78,6 @@ export class HomeView extends React.Component {
         <button className='btn btn-default' onClick={this.props.doubleAsync}>
           Double (Async)
         </button>
-        <hr />
-        <Link to='/404'><FormattedMessage {...messages.linkNotFoundView} /></Link>
       </div>
     )
   }

@@ -43,12 +43,13 @@ addLocaleData(fr)
 // the `ECMAScript Internationalization API`.
 // For that we need to patch in on runtime.
 if (!global.Intl) {
-  require.ensure(['intl'], require => {
-    require('intl')
+  require.ensure(['intl'], (requ) => {
+    requ('intl')
     start()
   }, 'IntlBundle')
+} else {
+  start()
 }
-else start()
 
 function start () {
   // Render the React application to the DOM

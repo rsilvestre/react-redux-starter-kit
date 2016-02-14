@@ -22,16 +22,6 @@
   </segment>
 </unit>
   
-<unit id="home.linkNotFoundView">
-  <notes>
-    <note>Text link for not found view</note>
-  </notes>
-  <segment state="translated">
-    <source><![CDATA[Go to 404 Page]]></source>
-    <target><![CDATA[Aller à la vue 404 error]]></target>
-  </segment>
-</unit>
-  
 <unit id="home.sampleCounter">
   <notes>
     <note>Sample Counter text</note>
@@ -89,26 +79,6 @@
   <segment state="translated">
     <source><![CDATA[Spanish]]></source>
     <target><![CDATA[Español]]></target>
-  </segment>
-</unit>
-  
-<unit id="notFound.linkHomeView">
-  <notes>
-    <note>Text link for home view</note>
-  </notes>
-  <segment state="translated">
-    <source><![CDATA[Back To Home View]]></source>
-    <target><![CDATA[Retourner à la vue de dèpart]]></target>
-  </segment>
-</unit>
-  
-<unit id="notFound.welcome">
-  <notes>
-    <note>page message</note>
-  </notes>
-  <segment state="translated">
-    <source><![CDATA[This is a demo 404 page!]]></source>
-    <target><![CDATA[Cella est la vue 404 error]]></target>
   </segment>
 </unit>
   

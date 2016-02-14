@@ -1,3 +1,4 @@
+/* @flow */
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { actions as counterActions } from '../../redux/modules/counter'
@@ -45,6 +46,8 @@ const mapStateToProps = (state) => ({
   locale: state.locale
 })
 export class HomeView extends React.Component {
+  _handleIncrement: Function;
+
   static propTypes = {
     counter: PropTypes.number.isRequired,
     doubleAsync: PropTypes.func.isRequired,
@@ -54,7 +57,7 @@ export class HomeView extends React.Component {
 
   constructor () {
     super()
-    this._handleIncrement = ::this._handleIncrement
+    this._handleIncrement = this._handleIncrement.bind(this)
   }
 
   _handleIncrement () {

@@ -38,4 +38,3 @@ There are console errors for the default language (en). It will be [fixed with t
 #### Thanks
 
 - [Emmenko react redux example](https://github.com/emmenko/redux-react-router-async-example) for the integration of React Intl.
-

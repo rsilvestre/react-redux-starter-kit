@@ -19,6 +19,7 @@ $ npm start                     # Compile and launch
 ```
 
 ### I18n support
+
 All messages in this website are localized and rendered using `react-intl@2.0`.
 
 There is also a [babel plugin](https://github.com/yahoo/babel-plugin-react-intl) to extract all the default messages into `./_translations/lib` to be provided to translators.

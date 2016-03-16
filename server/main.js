@@ -9,6 +9,7 @@ import _debug from 'debug'
 import config from '../config'
 import webpackDevMiddleware from './middleware/webpack-dev'
 import webpackHMRMiddleware from './middleware/webpack-hmr'
+import rewrite from 'koa-rewrite'
 
 const debug = _debug('app:server')
 const paths = config.utils_paths
@@ -37,6 +38,14 @@ if (config.env === 'development') {
 
   app.use(webpackDevMiddleware(compiler, publicPath))
   app.use(webpackHMRMiddleware(compiler))
+
+  // semantic files are in their own folder when running dev server.
+  // Use the production path in the html and for development this
+  // will rewrite the request.
+  app.use(convert(rewrite('/semantic/*', '/$1')))
+
+  // Serve semantic-ui assets for above reason
+  app.use(convert(serve(paths.client('semantic/dist'))))
 
   // Serve static assets from ~/src/static since Webpack is unaware of
   // these files. This middleware doesn't need to be enabled outside

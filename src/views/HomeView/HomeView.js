@@ -28,6 +28,10 @@ export class HomeView extends React.Component<void, Props, void> {
     increment: PropTypes.func.isRequired
   };
 
+  componentDidMount () {
+    $('select.dropdown').dropdown('set selected', ['meteor', 'ember'])
+  }
+
   render () {
     return (
       <div className='container text-center'>
@@ -51,6 +55,16 @@ export class HomeView extends React.Component<void, Props, void> {
         <button className='btn btn-default' onClick={this.props.doubleAsync}>
           Double (Async)
         </button>
+        <select name='skills' multiple='' className='ui fluid dropdown' onchange={this.props.handleChange}>
+          <option value=''>Skills</option>
+          <option value='angular'>Angular</option>
+          <option value='css'>CSS</option>
+          <option value='ember'>Ember</option>
+          <option value='html'>HTML</option>
+          <option value='javascript'>Javascript</option>
+          <option value='meteor'>Meteor</option>
+          <option value='node'>NodeJS</option>
+        </select>
       </div>
     )
   }

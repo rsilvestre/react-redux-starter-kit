@@ -4,6 +4,37 @@ import { connect } from 'react-redux'
 import { increment, doubleAsync } from '../../redux/modules/counter'
 import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
+import { localeChange } from '../../redux/modules/locale'
+import { defineMessages, FormattedMessage } from 'react-intl'
+import LanguageSelector from 'components/LanguageSelector'
+
+const messages = defineMessages({
+  welcome: {
+    id: 'home.welcome',
+    description: 'Welcome to the homepage',
+    defaultMessage: 'Welcome to the React Redux Starter Kit'
+  },
+  sampleCounter: {
+    id: 'home.sampleCounter',
+    description: 'Sample Counter text',
+    defaultMessage: 'Sample Counter: '
+  },
+  spanish: {
+    id: 'home.spanish',
+    description: 'Select language',
+    defaultMessage: 'Spanish'
+  },
+  english: {
+    id: 'home.english',
+    description: 'Select language',
+    defaultMessage: 'English'
+  },
+  french: {
+    id: 'home.french',
+    description: 'Select language',
+    defaultMessage: 'French'
+  }
+})
 
 // We can use Flow (http://flowtype.org/) to type our component's props
 // and state. For convenience we've included both regular propTypes and
@@ -15,7 +46,8 @@ import classes from './HomeView.scss'
 type Props = {
   counter: number,
   doubleAsync: Function,
-  increment: Function
+  increment: Function,
+  localeChange: Function
 };
 
 // We avoid using the `@connect` decorator on the class definition so
@@ -25,12 +57,17 @@ export class HomeView extends React.Component<void, Props, void> {
   static propTypes = {
     counter: PropTypes.number.isRequired,
     doubleAsync: PropTypes.func.isRequired,
-    increment: PropTypes.func.isRequired
+    increment: PropTypes.func.isRequired,
+    localeChange: PropTypes.func.isRequired
   };
 
   render () {
+    const {localeChange} = this.props
     return (
       <div className='container text-center'>
+        <LanguageSelector onChange={localeChange}>prueba Idioma Selector</LanguageSelector>
+
+        <h1><FormattedMessage {...messages.welcome} /></h1>
         <div className='row'>
           <div className='col-xs-2 col-xs-offset-5'>
             <img className={classes.duck}
@@ -38,10 +75,9 @@ export class HomeView extends React.Component<void, Props, void> {
               alt='This is a duck, because Redux.' />
           </div>
         </div>
-        <h1>Welcome to the React Redux Starter Kit</h1>
+        <h1><FormattedMessage {...messages.welcome} /></h1>
         <h2>
-          Sample Counter:
-          {' '}
+          <FormattedMessage {...messages.sampleCounter} />
           <span className={classes['counter--green']}>{this.props.counter}</span>
         </h2>
         <button className='btn btn-default' onClick={this.props.increment}>
@@ -57,9 +93,12 @@ export class HomeView extends React.Component<void, Props, void> {
 }
 
 const mapStateToProps = (state) => ({
-  counter: state.counter
+  counter: state.counter,
+  locale: state.locale
 })
+
 export default connect((mapStateToProps), {
   increment: () => increment(1),
-  doubleAsync
+  doubleAsync,
+  localeChange
 })(HomeView)

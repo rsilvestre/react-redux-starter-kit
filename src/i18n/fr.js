@@ -4,6 +4,6 @@ export default {
   "home.sampleCounter": "Contateur d'example: ",
   "languageSelector.spanish": "Español",
   "languageSelector.english": "Inglés",
-  "languageSelector.french": "Francés"
+  "languageSelector.french": "Français"
 }
 

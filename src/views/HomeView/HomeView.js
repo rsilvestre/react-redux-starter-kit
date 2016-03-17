@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { increment, doubleAsync } from '../../redux/modules/counter'
 import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
-import { actions as localeActions } from '../../redux/modules/locale'
+import { localeChange } from '../../redux/modules/locale'
 import { defineMessages, FormattedMessage } from 'react-intl'
 import LanguageSelector from 'components/LanguageSelector'
 
@@ -47,7 +47,7 @@ type Props = {
   counter: number,
   doubleAsync: Function,
   increment: Function,
-  locale: Function
+  localeChange: Function
 };
 
 // We avoid using the `@connect` decorator on the class definition so
@@ -100,5 +100,5 @@ const mapStateToProps = (state) => ({
 export default connect((mapStateToProps), {
   increment: () => increment(1),
   doubleAsync,
-  localeActions
+  localeChange
 })(HomeView)

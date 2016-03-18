@@ -1,4 +1,6 @@
-React Redux Starter Kit with Localization
+# React Redux Starter Kit with Localization
+
+[![Build Status](https://travis-ci.org/rsilvestre/react-redux-starter-kit.svg?branch=master)](https://travis-ci.org/rsilvestre/react-redux-starter-kit)
 
 Based on [React Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit).
 

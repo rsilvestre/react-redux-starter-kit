@@ -62,12 +62,10 @@ export class HomeView extends React.Component<void, Props, void> {
   };
 
   render () {
-    const {localeChange} = this.props
     return (
       <div className='container text-center'>
-        <LanguageSelector onChange={localeChange}>prueba Idioma Selector</LanguageSelector>
+        <LanguageSelector onChange={this.props.localeChange}>prueba Idioma Selector</LanguageSelector>
 
-        <h1><FormattedMessage {...messages.welcome} /></h1>
         <div className='row'>
           <div className='col-xs-2 col-xs-offset-5'>
             <img className={classes.duck}

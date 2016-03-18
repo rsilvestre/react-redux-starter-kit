@@ -1,6 +1,6 @@
 # React Redux Starter Kit with Localization
 
-[![Build Status](https://travis-ci.org/rsilvestre/react-redux-starter-kit.svg?branch=internationalization)](https://travis-ci.org/rsilvestre/react-redux-starter-kit)
+[![Build Status](https://travis-ci.org/rsilvestre/react-redux-starter-kit.svg?branch=internationalization)](https://travis-ci.org/rsilvestre/react-redux-starter-kit) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 Based on [React Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit).
 

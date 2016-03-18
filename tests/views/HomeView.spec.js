@@ -140,7 +140,7 @@ describe('(View) Home', function () {
 
     it('should dispatch an action when selected.', function () {
       _spies.dispatch.should.have.not.been.called
-      TestUtils.Simulate.change(_select[0].getDOMNode(), { target: { value: 'fr' } })
+      TestUtils.Simulate.change(_select[0], { target: { value: 'fr' } })
       _spies.dispatch.should.have.been.called
     })
   })

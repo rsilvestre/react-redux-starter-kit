@@ -126,4 +126,22 @@ describe('(View) Home', function () {
       _spies.dispatch.should.have.been.called
     })
   })
+
+  describe('Change language to french.', function () {
+    let _select
+
+    beforeEach(() => {
+      _select = TestUtils.scryRenderedDOMComponentsWithTag(_rendered, 'select')
+    })
+
+    it('should be rendered.', function () {
+      expect(_select).to.exist
+    })
+
+    it('should dispatch an action when selected.', function () {
+      _spies.dispatch.should.have.not.been.called
+      TestUtils.Simulate.change(_select[0].getDOMNode(), { target: { value: 'fr' } })
+      _spies.dispatch.should.have.been.called
+    })
+  })
 })

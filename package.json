@@ -67,8 +67,8 @@
   "license": "MIT",
   "dependencies": {
     "debug": "^2.2.0",
-    "intl": "^1.0.1",
     "history": "^2.0.0",
+    "intl": "^1.0.1",
     "koa": "^2.0.0-alpha.3",
     "koa-connect-history-api-fallback": "^0.3.0",
     "koa-convert": "^1.2.0",
@@ -76,7 +76,7 @@
     "koa-static": "^2.0.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-intl": "2.0.0-beta-2",
+    "react-intl": "^2.0.0-rc-1",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0.0",

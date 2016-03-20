@@ -10,7 +10,7 @@ const config = {
   // ----------------------------------
   // Project Structure
   // ----------------------------------
-  path_base  : path.resolve(__dirname, '../'),
+  path_base  : path.resolve(__dirname, '..'),
   dir_client : 'src',
   dir_dist   : 'dist',
   dir_server : 'server',
@@ -19,8 +19,8 @@ const config = {
   // ----------------------------------
   // Server Configuration
   // ----------------------------------
-  server_host : 'arasaac.catedu.aragon.es',
-  server_port : process.env.PORT || 80,
+  server_host : 'localhost',
+  server_port : process.env.PORT || 3000,
 
   // ----------------------------------
   // Compiler Configuration
@@ -51,7 +51,7 @@ const config = {
   coverage_enabled   : !argv.watch,
   coverage_reporters : [
     { type : 'text-summary' },
-    { type : 'html', dir : 'coverage' }
+    { type : 'lcov', dir : 'coverage' }
   ]
 }
 
@@ -87,7 +87,7 @@ config.globals = {
 const pkg = require('../package.json')
 
 config.compiler_vendor = config.compiler_vendor
-  .filter(dep => {
+  .filter((dep) => {
     if (pkg.dependencies[dep]) return true
 
     debug(

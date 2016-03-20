@@ -1,5 +1,6 @@
-React Redux Starter Kit with Localization
-==========================================
+# React Redux Starter Kit with Localization
+
+[![Build Status](https://travis-ci.org/rsilvestre/react-redux-starter-kit.svg?branch=internationalization)](https://travis-ci.org/rsilvestre/react-redux-starter-kit) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 Based on [React Redux Starter Kit](https://github.com/davezuko/react-redux-starter-kit).
 
@@ -20,7 +21,6 @@ $ npm start                     # Compile and launch
 ```
 
 ### I18n support
-
 All messages in this website are localized and rendered using `react-intl@2.0`.
 
 There is also a [babel plugin](https://github.com/yahoo/babel-plugin-react-intl) to extract all the default messages into `./_translations/lib` to be provided to translators.
@@ -40,4 +40,3 @@ There are console errors for the default language (en). It will be [fixed with t
 #### Thanks
 
 - [Emmenko react redux example](https://github.com/emmenko/redux-react-router-async-example) for the integration of React Intl.
-

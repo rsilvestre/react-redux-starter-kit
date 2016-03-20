@@ -18,14 +18,14 @@ const karmaConfig = {
     }
   ],
   singleRun: !argv.watch,
-  frameworks: ['mocha'],
+  frameworks: ['mocha', 'intl-shim'],
+  reporters: ['mocha'],
   preprocessors: {
-    [`${config.dir_test}/test-bundler.js`]: ['webpack', 'sourcemap']
+    [`${config.dir_test}/test-bundler.js`]: ['webpack']
   },
-  reporters: ['spec'],
   browsers: ['PhantomJS'],
   webpack: {
-    devtool: 'inline-source-map',
+    devtool: 'cheap-module-source-map',
     resolve: {
       ...webpackConfig.resolve,
       alias: {
@@ -33,22 +33,20 @@ const karmaConfig = {
         sinon: 'sinon/pkg/sinon.js'
       }
     },
-    plugins: webpackConfig.plugins,
+    plugins: [...webpackConfig.plugins],
     module: {
       noParse: [
         /\/sinon\.js/
       ],
       loaders: webpackConfig.module.loaders.concat([
         {
-          test: /sinon\/pkg\/sinon\.js/,
+          test: /sinon(\\|\/)pkg(\\|\/)sinon\.js/,
           loader: 'imports?define=>false,require=>false'
         }
       ])
     },
     externals: {
       ...webpackConfig.externals,
-      jsdom: 'window',
-      cheerio: 'window',
       'react/lib/ExecutionEnvironment': true,
       'react/lib/ReactContext': 'window',
       'text-encoding': 'window'
@@ -73,4 +71,5 @@ if (config.coverage_enabled) {
   }]
 }
 
-export default (cfg) => cfg.set(karmaConfig)
+// cannot use `export default` because of Karma.
+module.exports = (cfg) => cfg.set(karmaConfig)

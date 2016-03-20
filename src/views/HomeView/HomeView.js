@@ -1,10 +1,10 @@
+/* @flow */
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import { actions as counterActions } from '../../redux/modules/counter'
+import { increment, doubleAsync } from '../../redux/modules/counter'
 import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
-import { actions as localeActions } from '../../redux/modules/locale'
+import { localeChange } from '../../redux/modules/locale'
 import { defineMessages, FormattedMessage } from 'react-intl'
 import LanguageSelector from 'components/LanguageSelector'
 
@@ -18,11 +18,6 @@ const messages = defineMessages({
     id: 'home.sampleCounter',
     description: 'Sample Counter text',
     defaultMessage: 'Sample Counter: '
-  },
-  linkNotFoundView: {
-    id: 'home.linkNotFoundView',
-    description: 'Text link for not found view',
-    defaultMessage: 'Go to 404 Page'
   },
   spanish: {
     id: 'home.spanish',
@@ -41,16 +36,24 @@ const messages = defineMessages({
   }
 })
 
-// We define mapStateToProps where we'd normally use
-// the @connect decorator so the data requirements are clear upfront, but then
-// export the decorated component after the main class definition so
-// the component can be tested w/ and w/o being connected.
+// We can use Flow (http://flowtype.org/) to type our component's props
+// and state. For convenience we've included both regular propTypes and
+// Flow types, but if you want to try just using Flow you'll want to
+// disable the eslint rule `react/prop-types`.
+// NOTE: You can run `npm run flow:check` to check for any errors in your
+// code, or `npm i -g flow-bin` to have access to the binary globally.
+// Sorry Windows users :(.
+type Props = {
+  counter: number,
+  doubleAsync: Function,
+  increment: Function,
+  localeChange: Function
+};
+
+// We avoid using the `@connect` decorator on the class definition so
+// that we can export the undecorated component for testing.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
-const mapStateToProps = (state) => ({
-  counter: state.counter,
-  locale: state.locale
-})
-export class HomeView extends React.Component {
+export class HomeView extends React.Component<void, Props, void> {
   static propTypes = {
     counter: PropTypes.number.isRequired,
     doubleAsync: PropTypes.func.isRequired,
@@ -59,17 +62,15 @@ export class HomeView extends React.Component {
   };
 
   render () {
-    const {localeChange} = this.props
     return (
       <div className='container text-center'>
-      <LanguageSelector onChange={localeChange}>prueba Idioma Selector</LanguageSelector>
+        <LanguageSelector onChange={this.props.localeChange}>prueba Idioma Selector</LanguageSelector>
 
-        <h1><FormattedMessage {...messages.welcome} /></h1>
         <div className='row'>
           <div className='col-xs-2 col-xs-offset-5'>
             <img className={classes.duck}
-                 src={DuckImage}
-                 alt='This is a duck, because Redux.' />
+              src={DuckImage}
+              alt='This is a duck, because Redux.' />
           </div>
         </div>
         <h1><FormattedMessage {...messages.welcome} /></h1>
@@ -77,19 +78,25 @@ export class HomeView extends React.Component {
           <FormattedMessage {...messages.sampleCounter} />
           <span className={classes['counter--green']}>{this.props.counter}</span>
         </h2>
-        <button className='btn btn-default'
-                onClick={() => this.props.increment(1)}>
+        <button className='btn btn-default' onClick={this.props.increment}>
           Increment
         </button>
         {' '}
-        <button className='btn btn-default'
-                onClick={this.props.doubleAsync}>
+        <button className='btn btn-default' onClick={this.props.doubleAsync}>
           Double (Async)
         </button>
-        <hr />
-        <Link to='/404'><FormattedMessage {...messages.linkNotFoundView} /></Link>
       </div>
     )
   }
 }
-export default connect(mapStateToProps, Object.assign({}, counterActions, localeActions))(HomeView)
+
+const mapStateToProps = (state) => ({
+  counter: state.counter,
+  locale: state.locale
+})
+
+export default connect((mapStateToProps), {
+  increment: () => increment(1),
+  doubleAsync,
+  localeChange
+})(HomeView)

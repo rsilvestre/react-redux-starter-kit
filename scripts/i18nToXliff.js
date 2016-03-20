@@ -15,8 +15,8 @@ console.log('langDoc:' + JSON.stringify(i18n))
 // there are messages in different components that use the same `id`. The result
 // is a flat collection of `id: message` pairs for the app's default locale.
 let defaultMessages = globSync(MESSAGES_PATTERN)
-.map(filename => fs.readFileSync(filename, 'utf8'))
-.map(file => JSON.parse(file))
+.map((filename) => fs.readFileSync(filename, 'utf8'))
+.map((file) => JSON.parse(file))
 .reduce((collection, descriptors) => {
   descriptors.forEach(({ id, defaultMessage, description }) => {
     if (collection.hasOwnProperty(id)) {
@@ -41,7 +41,7 @@ i18n.en = messageKeys.reduce((acc, key) => {
   acc[key] = defaultMessages[key].defaultMessage
   return acc
 }, {})
-Object.keys(i18n).forEach(lang => {
+Object.keys(i18n).forEach((lang) => {
   const langDoc = i18n[lang]
   const units = buildUnits(defaultMessages, langDoc)
 
@@ -51,7 +51,7 @@ Object.keys(i18n).forEach(lang => {
 function buildUnits (source, target) {
   console.log('source:' + source)
   console.log('target:' + target)
-  return Object.keys(source).map(key => {
+  return Object.keys(source).map((key) => {
     const sourceMessage = source[key]
     const targetMessage = target[key]
 

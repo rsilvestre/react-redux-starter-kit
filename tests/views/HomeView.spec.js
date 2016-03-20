@@ -3,6 +3,8 @@ import TestUtils from 'react-addons-test-utils'
 import { bindActionCreators } from 'redux'
 import { HomeView } from 'views/HomeView/HomeView'
 import { mount } from 'enzyme'
+import { IntlProvider } from 'react-intl'
+import * as messages from 'i18n/'
 
 function shallowRender (component) {
   const renderer = TestUtils.createRenderer()
@@ -12,7 +14,15 @@ function shallowRender (component) {
 }
 
 function renderWithProps (props = {}) {
-  return TestUtils.renderIntoDocument(<HomeView {...props} />)
+  const intlData = {
+    locale: props.locale,
+    messages: messages[props.locale]
+  }
+  return TestUtils.renderIntoDocument(
+    <IntlProvider {...intlData}>
+      <HomeView {...props} />
+    </IntlProvider>
+  )
 }
 
 function shallowRenderWithProps (props = {}) {
@@ -26,9 +36,11 @@ describe('(View) Home', function () {
     _spies = {}
     _props = {
       counter: 0,
+      locale: 'en',
       ...bindActionCreators({
         doubleAsync: (_spies.doubleAsync = sinon.spy()),
-        increment: (_spies.increment = sinon.spy())
+        increment: (_spies.increment = sinon.spy()),
+        localeChange: (_spies.localeChange = sinon.spy())
       }, _spies.dispatch = sinon.spy())
     }
 
@@ -64,7 +76,15 @@ describe('(View) Home', function () {
   })
 
   it('Should render exactly two buttons.', function () {
-    const wrapper = mount(<HomeView />)
+    const intlData = {
+      locale: _props.locale,
+      messages: messages[_props.locale]
+    }
+    const wrapper = mount(
+      <IntlProvider {...intlData}>
+        <HomeView {..._props} />
+      </IntlProvider>
+    )
 
     expect(wrapper).to.have.descendants('.btn')
   })
@@ -103,6 +123,24 @@ describe('(View) Home', function () {
     it('should dispatch an action when clicked.', function () {
       _spies.dispatch.should.have.not.been.called
       TestUtils.Simulate.click(_btn)
+      _spies.dispatch.should.have.been.called
+    })
+  })
+
+  describe('Change language to french.', function () {
+    let _select
+
+    beforeEach(() => {
+      _select = TestUtils.scryRenderedDOMComponentsWithTag(_rendered, 'select')
+    })
+
+    it('should be rendered.', function () {
+      expect(_select).to.exist
+    })
+
+    it('should dispatch an action when selected.', function () {
+      _spies.dispatch.should.have.not.been.called
+      TestUtils.Simulate.change(_select[0], { target: { value: 'fr' } })
       _spies.dispatch.should.have.been.called
     })
   })

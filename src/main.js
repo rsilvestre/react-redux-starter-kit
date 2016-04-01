@@ -7,11 +7,11 @@ import makeRoutes from './routes'
 import Root from './containers/Root'
 import configureStore from './redux/configureStore'
 import { addLocaleData } from 'react-intl'
-import en from 'react-intl/lib/locale-data/en'
-import de from 'react-intl/lib/locale-data/de'
-import it from 'react-intl/lib/locale-data/it'
-import es from 'react-intl/lib/locale-data/es'
-import fr from 'react-intl/lib/locale-data/fr'
+import en from 'react-intl/locale-data/en'
+import de from 'react-intl/locale-data/de'
+import it from 'react-intl/locale-data/it'
+import es from 'react-intl/locale-data/es'
+import fr from 'react-intl/locale-data/fr'
 
 // Configure history for react-router
 const browserHistory = useRouterHistory(createBrowserHistory)({

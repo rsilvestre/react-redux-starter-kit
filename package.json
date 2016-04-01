@@ -19,6 +19,7 @@
     "test": "better-npm-run test",
     "test:dev": "npm run test -- --watch",
     "deploy": "better-npm-run deploy",
+    "deploy:no-env": "better-npm-run deploy-no-env",
     "build:i18n": "rm -rf _translations && BABEL_ENV=i18n babel --quiet src > /dev/null",
     "build:i18n:langs": "npm run build:i18n && babel-node --babelrc=false scripts/i18nToXliff.js",
     "flow:check": "babel-node bin/flow-check",
@@ -42,6 +43,12 @@
       "command": "npm run clean && npm run compile",
       "env": {
         "NODE_ENV": "production",
+        "DEBUG": "app:*"
+      }
+    },
+    "deploy-no-env": {
+      "command": "npm run clean && npm run compile",
+      "env": {
         "DEBUG": "app:*"
       }
     },

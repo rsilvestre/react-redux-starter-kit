@@ -39,6 +39,16 @@ addLocaleData(it)
 addLocaleData(es)
 addLocaleData(fr)
 
+function start () {
+  // Now that redux and react-router have been configured, we can render the
+  // React application to the DOM!
+
+  ReactDOM.render(
+    <Root history={history} routes={routes} store={store} />,
+    document.getElementById('root')
+  )
+}
+
 // All modern browsers, expect `Safari`, have implemented
 // the `ECMAScript Internationalization API`.
 // For that we need to patch in on runtime.
@@ -50,19 +60,3 @@ if (!global.Intl) {
 } else {
   start()
 }
-
-function start () {
-  // Render the React application to the DOM
-  ReactDOM.render(
-    <Root history={history} routes={routes} store={store} />,
-    document.getElementById('root')
-  )
-}
-
-// Now that redux and react-router have been configured, we can render the
-// React application to the DOM!
-
-ReactDOM.render(
-  <Root history={history} routes={routes} store={store} />,
-  document.getElementById('root')
-)

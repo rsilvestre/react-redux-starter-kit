@@ -89,6 +89,17 @@ if (!__TEST__) {
 // ------------------------------------
 // Pre-Loaders
 // ------------------------------------
+/*
+[ NOTE ]
+We no longer use eslint-loader due to it severely impacting build
+times for larger projects. `npm run lint` still exists to aid in
+deploy processes (such as with CI), and it's recommended that you
+use a linting plugin for your IDE in place of this loader.
+
+If you do wish to continue using the loader, you can uncomment
+the code below and run `npm i --save-dev eslint-loader`. This code
+will be removed in a future release.
+
 webpackConfig.module.preLoaders = [{
   test: /\.(js|jsx)$/,
   loader: 'eslint',
@@ -99,6 +110,7 @@ webpackConfig.eslint = {
   configFile: paths.base('.eslintrc'),
   emitWarning: __DEV__
 }
+*/
 
 // ------------------------------------
 // Loaders
@@ -129,8 +141,11 @@ webpackConfig.module.loaders = [{
       },
       production: {
         plugins: [
-          'transform-react-remove-prop-types',
-          'transform-react-constant-elements'
+          // should be reactivate at some point (ASAP).
+          // https://www.npmjs.com/package/babel-plugin-transform-react-constant-elements
+          // Treat React JSX elements as value types and hoist them to the highest scope
+          // 'transform-react-constant-elements',
+          'transform-react-remove-prop-types'
         ]
       }
     }

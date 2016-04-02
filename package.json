@@ -105,7 +105,6 @@
     "imports-loader": "^0.6.5",
     "intl": "^1.1.0",
     "json-loader": "^0.5.4",
-    "json-loader": "^0.5.4",
     "koa": "^2.0.0-alpha.3",
     "koa-connect-history-api-fallback": "^0.3.0",
     "koa-convert": "^1.2.0",

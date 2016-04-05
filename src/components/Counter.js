@@ -1,6 +1,15 @@
 /* @flow */
 import React from 'react'
+import { defineMessages, FormattedMessage } from 'react-intl'
 import classes from './Counter.scss'
+
+const messages = defineMessages({
+  sampleCounter: {
+    id: 'home.sampleCounter',
+    description: 'Sample Counter text',
+    defaultMessage: 'Sample Counter:'
+  }
+})
 
 // FlowType annotations
 type Props = {
@@ -12,7 +21,7 @@ type Props = {
 export const Counter = (props: Props) => (
   <div>
     <h2 className={classes.counterContainer}>
-      Counter:
+      <FormattedMessage {...messages.sampleCounter} />
       {' '}
       <span className={classes['counter--green']}>
         {props.counter}

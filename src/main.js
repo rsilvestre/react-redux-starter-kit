@@ -9,6 +9,13 @@ import createStore from './store/createStore'
 const MOUNT_ELEMENT = document.getElementById('root')
 const DEFAULT_TITLE = 'React Redux Starter Kit'
 
+import { addLocaleData } from 'react-intl'
+import en from 'react-intl/locale-data/en'
+import de from 'react-intl/locale-data/de'
+import it from 'react-intl/locale-data/it'
+import es from 'react-intl/locale-data/es'
+import fr from 'react-intl/locale-data/fr'
+
 // Configure history for react-router
 const browserHistory = useRouterHistory(createBrowserHistory)({
   basename: __BASENAME__
@@ -22,6 +29,12 @@ const store = createStore(window.__INITIAL_STATE__, browserHistory)
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.router
 })
+
+addLocaleData(en)
+addLocaleData(de)
+addLocaleData(it)
+addLocaleData(es)
+addLocaleData(fr)
 
 // Default titles and nested template (react-helmet)
 const title = {
@@ -38,22 +51,36 @@ let render = () => {
   ReactDOM.render(<Root {...props}/>, MOUNT_ELEMENT)
 }
 
-// If supported, set up hot reloading and overlay for runtime errors
-if (module.hot) {
-  const renderApp = render
-  const renderError = (error) => {
-    const RedBox = require('redbox-react')
+let start = () => {
+  // If supported, set up hot reloading and overlay for runtime errors
+  if (module.hot) {
+    const renderApp = render
+    const renderError = (error) => {
+      const RedBox = require('redbox-react')
 
-    ReactDOM.render(<RedBox error={error} />, MOUNT_ELEMENT)
-  }
-  render = () => {
-    try {
-      renderApp()
-    } catch (error) {
-      renderError(error)
+      ReactDOM.render(<RedBox error={error} />, MOUNT_ELEMENT)
     }
+    render = () => {
+      try {
+        renderApp()
+      } catch (error) {
+        renderError(error)
+      }
+    }
+    module.hot.accept(['./routes/index'], () => render())
   }
-  module.hot.accept(['./routes/index'], () => render())
+
+  render()
 }
 
-render()
+// All modern browsers, expect `Safari`, have implemented
+// the `ECMAScript Internationalization API`.
+// For that we need to patch in on runtime.
+if (!global.Intl) {
+  require.ensure(['intl'], (requ) => {
+    requ('intl')
+    start()
+  }, 'IntlBundle')
+}
+
+start()

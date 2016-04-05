@@ -1,21 +1,38 @@
 import React from 'react'
+import TestUtils from 'react-addons-test-utils'
 import { bindActionCreators } from 'redux'
 import { Counter } from 'components/Counter'
 import { shallow } from 'enzyme'
+import { IntlProvider } from 'react-intl'
+import * as messages from 'i18n/'
+
+function renderWithProps (props = {}) {
+  const intlData = {
+    locale: props.locale,
+    messages: messages[props.locale]
+  }
+  return TestUtils.renderIntoDocument(
+    <IntlProvider {...intlData}>
+      <Counter {...props} />
+    </IntlProvider>
+  )
+}
 
 describe('(Component) Counter', () => {
-  let _props, _spies, _wrapper
+  let _props, _spies, _wrapper, _rendered
 
   beforeEach(() => {
     _spies = {}
     _props = {
       counter: 5,
+      locale: 'en',
       ...bindActionCreators({
         doubleAsync: (_spies.doubleAsync = sinon.spy()),
         increment: (_spies.increment = sinon.spy())
       }, _spies.dispatch = sinon.spy())
     }
     _wrapper = shallow(<Counter {..._props} />)
+    _rendered = renderWithProps(_props)
   })
 
   it('Should render as a <div>.', () => {
@@ -23,7 +40,10 @@ describe('(Component) Counter', () => {
   })
 
   it('Should render with an <h2> that includes Sample Counter text.', () => {
-    expect(_wrapper.find('h2').text()).to.match(/Counter:/)
+    const h2 = TestUtils.findRenderedDOMComponentWithTag(_rendered, 'h2')
+
+    expect(h2).to.exist
+    expect(h2.textContent).to.match(/Sample Counter: 5/)
   })
 
   it('Should render props.counter at the end of the sample counter <h2>.', () => {

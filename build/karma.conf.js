@@ -18,7 +18,7 @@ const karmaConfig = {
     }
   ],
   singleRun: !argv.watch,
-  frameworks: ['mocha'],
+  frameworks: ['mocha', 'intl-shim'],
   reporters: ['mocha'],
   preprocessors: {
     [`${config.dir_test}/test-bundler.js`]: ['webpack']
@@ -33,7 +33,7 @@ const karmaConfig = {
         sinon: 'sinon/pkg/sinon.js'
       }
     },
-    plugins: webpackConfig.plugins,
+    plugins: [...webpackConfig.plugins],
     module: {
       noParse: [
         /\/sinon\.js/

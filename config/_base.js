@@ -38,7 +38,9 @@ const config = {
   },
   compiler_vendor : [
     'history',
+    'intl',
     'react',
+    'react-intl',
     'react-redux',
     'react-router',
     'react-router-redux',

@@ -127,10 +127,7 @@ webpackConfig.module.loaders = [{
     env: {
       production: {
         plugins: [
-          // should be reactivate at some point (ASAP).
-          // https://www.npmjs.com/package/babel-plugin-transform-react-constant-elements
-          // Treat React JSX elements as value types and hoist them to the highest scope
-          // 'transform-react-constant-elements',
+          'transform-react-constant-elements',
           'transform-react-remove-prop-types'
         ]
       }

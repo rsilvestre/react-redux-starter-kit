@@ -1,4 +1,6 @@
 // We only need to import the modules necessary for initial render
+import { injectReducer } from '../store/reducers'
+import locale from '../modules/locale'
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import Home from './Home'
 
@@ -10,6 +12,12 @@ import Home from './Home'
     tools such as `redux-saga` and `rereduce`  */
 
 export const createRoutes = (store) => {
+  // Inject our reducer into the store
+  injectReducer({
+    store,
+    key: 'locale',
+    reducer: locale
+  })
   return {
     path: '/',
     component: CoreLayout,

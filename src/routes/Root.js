@@ -2,8 +2,8 @@ import React from 'react'
 import { connect, Provider } from 'react-redux'
 import { Router } from 'react-router'
 import { IntlProvider } from 'react-intl'
-import * as messages from '../i18n/'
 import Helmet from 'react-helmet'
+import * as messages from '../i18n/'
 
 class Root extends React.Component {
   static propTypes = {

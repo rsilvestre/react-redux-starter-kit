@@ -1,7 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 import { bindActionCreators } from 'redux'
-import { Counter } from 'components/Counter'
+import { Counter } from 'components/Counter/Counter'
 import { shallow } from 'enzyme'
 import { IntlProvider } from 'react-intl'
 import * as messages from 'i18n/'

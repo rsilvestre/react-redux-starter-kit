@@ -5,9 +5,9 @@ import thunk from 'redux-thunk'
 import reducers from './reducers'
 
 export default (initialState = {}, history) => {
-  // Compose final middleware and use devtools in debug environment
   let middleware = applyMiddleware(thunk, routerMiddleware(history))
 
+  // Use DevTools chrome extension in development
   if (__DEBUG__) {
     const devToolsExtension = window.devToolsExtension
 
@@ -16,8 +16,7 @@ export default (initialState = {}, history) => {
     }
   }
 
-  // Create final store and subscribe router in debug env ie. for devtools
-  const store = middleware(createStore)(reducers(), initialState)
+  const store = createStore(reducers(), initialState, middleware)
 
   store.asyncReducers = {}
 

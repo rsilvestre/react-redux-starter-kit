@@ -2,7 +2,7 @@ import React from 'react'
 import { IndexLink, Link } from 'react-router'
 import { defineMessages, FormattedMessage } from 'react-intl'
 import classes from './Header.scss'
-import LanguageSelector from './LanguageSelector'
+import LanguageSelector from '../LanguageSelector'
 
 const messages = defineMessages({
   welcome: {

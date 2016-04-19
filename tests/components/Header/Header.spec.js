@@ -1,6 +1,6 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
-import { Header } from 'components/Header'
+import { Header } from 'components/Header/Header'
 import { IndexLink, Link } from 'react-router'
 import { shallow } from 'enzyme'
 import { IntlProvider } from 'react-intl'

@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { useRouterHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
-import Root from './routes/Root'
 import createStore from './store/createStore'
+import Root from './routes/Root'
 
 const MOUNT_ELEMENT = document.getElementById('root')
-const DEFAULT_TITLE = 'React Redux Starter Kit'
 
 import { addLocaleData } from 'react-intl'
 import en from 'react-intl/locale-data/en'
@@ -36,38 +35,35 @@ addLocaleData(it)
 addLocaleData(es)
 addLocaleData(fr)
 
-// Default titles and nested template (react-helmet)
-const title = {
-  defaultTitle: DEFAULT_TITLE,
-  titleTemplate: `%s - ${DEFAULT_TITLE}`
-}
-
 let render = () => {
-  // This syntax will be updated in the near future to use System loader
-  const createRoutes = require('./routes/index').default
-  const routes = createRoutes(store)
-  const props = { history, routes, store, title }
+  const routes = require('./routes/index').default(store)
+  const props = { history, routes, store }
 
   ReactDOM.render(<Root {...props}/>, MOUNT_ELEMENT)
 }
 
 let start = () => {
   // If supported, set up hot reloading and overlay for runtime errors
-  if (module.hot) {
+  if (__DEV__ && module.hot) {
     const renderApp = render
     const renderError = (error) => {
       const RedBox = require('redbox-react')
 
-      ReactDOM.render(<RedBox error={error} />, MOUNT_ELEMENT)
+      ReactDOM.render(<RedBox error={error}/>, MOUNT_ELEMENT)
     }
     render = () => {
       try {
-        renderApp()
+        renderApp(Math.random())
       } catch (error) {
         renderError(error)
       }
     }
     module.hot.accept(['./routes/index'], () => render())
+  }
+
+  // Use Redux DevTools chrome extension
+  if (__DEBUG__) {
+    if (!window.devToolsExtension) window.devToolsExtension.open()
   }
 
   render()

@@ -2,7 +2,7 @@
 import React from 'react'
 import Header from './Header'
 import { connect } from 'react-redux'
-import { localeChange } from '../store/modules/locale'
+import { localeChange } from '../modules/locale'
 
 type Props = {
   localeChange: Function

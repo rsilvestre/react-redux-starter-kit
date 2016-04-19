@@ -3,18 +3,13 @@ import { connect, Provider } from 'react-redux'
 import { Router } from 'react-router'
 import { IntlProvider } from 'react-intl'
 import * as messages from '../i18n/'
-import Helmet from 'react-helmet'
 
 class Root extends React.Component {
   static propTypes = {
     locale: React.PropTypes.string.isRequired,
     history: React.PropTypes.object.isRequired,
     routes: React.PropTypes.object.isRequired,
-    store: React.PropTypes.object.isRequired,
-    title: React.PropTypes.shape({
-      defaultTitle: React.PropTypes.string.isRequired,
-      titleTemplate: React.PropTypes.string.isRequired
-    }).isRequired
+    store: React.PropTypes.object.isRequired
   }
 
   get content () {
@@ -25,7 +20,6 @@ class Root extends React.Component {
     return (
       <IntlProvider {...intlData}>
         <div>
-          <Helmet {...this.props.title}/>
           <Router history={this.props.history} key={Math.random()}>
             {this.props.routes}
           </Router>

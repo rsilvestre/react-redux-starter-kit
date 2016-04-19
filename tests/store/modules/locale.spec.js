@@ -2,7 +2,7 @@ import {
   LOCALE_CHANGE,
   localeChange,
   default as localeReducer
-} from 'store/modules/locale'
+} from '../../../src/modules/locale'
 
 describe('(Redux Module) Locale', function() {
   it('Should export a constant LOCALE_CHANGE.', function () {

@@ -9,7 +9,6 @@ export const reducers = (asyncReducers) => {
 }
 
 export const injectReducer = (store, { key, reducer }) => {
-  console.log(key)
   store.asyncReducers[key] = reducer
   store.replaceReducer(reducers(store.asyncReducers))
 }

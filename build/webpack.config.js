@@ -128,10 +128,7 @@ webpackConfig.module.loaders = [{
     presets: ['es2015', 'react', 'stage-0'],
     env: {
       production: {
-        plugins: [
-          'transform-react-constant-elements',
-          'transform-react-remove-prop-types'
-        ]
+        presets: ['react-optimize']
       }
     }
   }

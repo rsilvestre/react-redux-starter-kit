@@ -63,7 +63,7 @@ let start = () => {
 
   // Use Redux DevTools chrome extension
   if (__DEBUG__) {
-    if (!window.devToolsExtension) window.devToolsExtension.open()
+    if (window.devToolsExtension) window.devToolsExtension.open()
   }
 
   render()
